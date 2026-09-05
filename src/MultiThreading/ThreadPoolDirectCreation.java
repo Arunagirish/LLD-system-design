@@ -1,12 +1,14 @@
+package MultiThreading;
+
 import java.util.concurrent.*;
 
-public class Main {
+public class ThreadPoolDirectCreation {
 
     public static void main(String[] args) {
 
         ExecutorService executor = new ThreadPoolExecutor(
-                2,                      // corePoolSize
-                4,                      // maxPoolSize
+                2,
+                4,
                 60,
                 TimeUnit.SECONDS,
                 new ArrayBlockingQueue<>(2)
@@ -18,10 +20,7 @@ public class Main {
 
             executor.execute(() -> {
 
-                System.out.println(
-                        "Task " + task +
-                                " started by " +
-                                Thread.currentThread().getName());
+                System.out.println("Task " + task + " started by " + Thread.currentThread().getName());
 
                 try {
                     Thread.sleep(3000);
@@ -29,10 +28,7 @@ public class Main {
                     e.printStackTrace();
                 }
 
-                System.out.println(
-                        "Task " + task +
-                                " finished by " +
-                                Thread.currentThread().getName());
+                System.out.println("Task " + task + " finished by " + Thread.currentThread().getName());
 
             });
         }

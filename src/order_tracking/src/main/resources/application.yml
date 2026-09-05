@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: order-tracking
+
+  # Kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.example.ordertracking.model"
+
+  # Redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  # Cassandra
+  cassandra:
+    keyspace-name: order_tracking
+    contact-points: localhost
+    port: 9042
+    local-datacenter: datacenter1
+    schema-action: CREATE_IF_NOT_EXISTS
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.example.ordertracking: DEBUG

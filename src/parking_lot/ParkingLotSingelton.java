@@ -3,6 +3,7 @@ package parking_lot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class ParkingLotSingelton
 {
@@ -29,9 +30,20 @@ public class ParkingLotSingelton
         this.floors.add(floors);
     }
 
+    public void inject_parking_strategy(ParkingStrategy parkingStrategy)
+    {
+        this.parkingStrategy = parkingStrategy;
+    }
+
     public void park_vehicle(vehicle vehicle)
     {
-
+        Optional<ParkingSpot> parkingSpot = parkingStrategy.find_spot( floors,  vehicle);
+        if(parkingSpot.isPresent())
+        {
+            ParkingSpot spot = parkingSpot.get();
+            spot.park(vehicle);
+            ParkingTicket ticket = new ParkingTicket(spot,vehicle);
+        }
     }
 
 

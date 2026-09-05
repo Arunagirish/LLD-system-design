@@ -1,0 +1,20 @@
+package Logger_System;
+
+public enum LogLevel
+{
+    TRACE(1),
+    DEBUG(2),
+    INFO(3),
+    WARN(4),
+    ERROR(5),
+    FATAL(6);
+    int no;
+    LogLevel(int no)
+    {
+        this.no = no;
+    }
+    public int getValue()
+    {
+        return no;
+    }
+}
